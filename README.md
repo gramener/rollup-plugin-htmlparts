@@ -27,12 +27,12 @@ then create a HTML file like this (called, for example, `template.html`):
 Set up your `rollup.config.js` like this:
 
 ```js
-import { htmlparts } from 'rollup-plugin-htmlparts'
+const { htmlparts } = require('rollup-plugin-htmlparts')
 
 export default [
   {
     input: 'index.js',
-    output: { file: "dist/index.min.js", name: "package" },
+    output: { file: "index.min.js", name: "package", format: "umd" },
     plugins: [htmlparts('template.html')]
   }
 ]
@@ -44,6 +44,11 @@ Now, in the `index.js` mentioned above, you can import variables from
 ```js
 import { heading, body } from './template.html'
 ```
+
+Run `node_modules/.bin/rollup -c` to create the `index.min.js`, which
+will have the imported variables.
+
+## HTML structure
 
 Anything enclosed within `<!-- var <name> --> ... <!-- end -->` is treated as
 a HTML string and assigned to the variable `<name>`.
@@ -57,7 +62,6 @@ with these options:
 - `decodeEntities: true`
 - `removeComments: true`
 
-
 ## Installation
 
 ```sh
@@ -66,11 +70,9 @@ yarn install rollup-plugin-htmlparts
 npm install rollup-plugin-htmlparts
 ```
 
+## Changelog
 
-# Changelog
-
-
-# Release
+## Release
 
 ```sh
 # Update package.json version
