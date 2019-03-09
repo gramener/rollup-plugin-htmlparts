@@ -27,7 +27,7 @@ then create a HTML file like this (called, for example, `template.html`):
 Set up your `rollup.config.js` like this:
 
 ```js
-const { htmlparts } = require('rollup-plugin-htmlparts')
+import htmlparts from 'rollup-plugin-htmlparts'
 
 export default [
   {

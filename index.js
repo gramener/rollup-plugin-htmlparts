@@ -8,7 +8,7 @@ HTML, minified.
 const rollupPluginutils = require('rollup-pluginutils')
 const htmlMinifier = require('html-minifier')
 
-function htmlparts(includes) {
+export default function htmlparts(includes) {
   const filter = rollupPluginutils.createFilter([includes], [])
   return {
     name: 'htmlparts',
@@ -32,5 +32,3 @@ function htmlparts(includes) {
     }
   }
 }
-
-exports.htmlparts = htmlparts
