@@ -73,6 +73,7 @@ npm install rollup-plugin-htmlparts
 ## Changelog
 
 - 1.0.0: 9 Mar 2019 - Initial release
+- 1.1.0: 9 Mar 2019 - Switch to ES6 modules
 
 ## Release
 

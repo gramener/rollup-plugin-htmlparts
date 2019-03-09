@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-htmlparts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Converts HTML files into modules",
   "main": "index.js",
   "scripts": {
