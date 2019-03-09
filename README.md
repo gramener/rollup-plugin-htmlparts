@@ -2,7 +2,17 @@
 
 [![Build Status](https://travis-ci.com/gramener/rollup-plugin-htmlparts.svg)](https://travis-ci.com/gramener/rollup-plugin-htmlparts)
 
-Loads parts of a HTML file as a module. If you have this `template.html`:
+This helps you import HTML snippets into JavaScript variables using modules.
+
+Suppose you want this in your `index.js`:
+
+```js
+var heading = '<h1>This is the <em>heading</em></h1>'
+var body = '<p>This is the <strong>body</strong>.</p>'
+```
+
+... but prefer to use HTML files to save HTML (for syntax-highlighting, etc.),
+then create a HTML file like this (called, for example, `template.html`):
 
 ```html
 <!-- var heading -->
@@ -14,13 +24,43 @@ Loads parts of a HTML file as a module. If you have this `template.html`:
 <!-- end -->
 ```
 
-... then:
+Set up your `rollup.config.js` like this:
+
+```js
+const { htmlparts } = require('rollup-plugin-htmlparts')
+
+export default [
+  {
+    input: 'index.js',
+    output: { file: "index.min.js", name: "package", format: "umd" },
+    plugins: [htmlparts('template.html')]
+  }
+]
+```
+
+Now, in the `index.js` mentioned above, you can import variables from
+`template.html`.
 
 ```js
 import { heading, body } from './template.html'
-assert heading == '\n  <h1>This is the <em>heading</em>\n'
-assert body == '\n  <p>This is the <strong>body</strong>.</p>\n'
 ```
+
+Run `node_modules/.bin/rollup -c` to create the `index.min.js`, which
+will have the imported variables.
+
+## HTML structure
+
+Anything enclosed within `<!-- var <name> --> ... <!-- end -->` is treated as
+a HTML string and assigned to the variable `<name>`.
+
+The string is minified by [HTML Minifier](http://npmjs.com/package/html-minifier)
+with these options:
+
+- `collapseBooleanAttributes: true`
+- `collapseInlineTagWhitespace: true`
+- `collapseWhitespace: true`
+- `decodeEntities: true`
+- `removeComments: true`
 
 ## Installation
 
@@ -30,32 +70,11 @@ yarn install rollup-plugin-htmlparts
 npm install rollup-plugin-htmlparts
 ```
 
-## Usage
+## Changelog
 
-Configure `rollup.config.js` to allow import HTML files:
+- 1.0.0: 9 Mar 2019 - Initial release
 
-```js
-import htmlparts from "rollup-plugin-htmlparts"
-
-export default [
-  {
-    input: "index",
-    output: { file: "dist/index.min.js", name: "package" },
-    plugins: [ htmlparts("template.html") ]
-  }
-]
-```
-
-Now you import HTML files in any JS file handled by rollup:
-
-```js
-import * as default_templates from './template.html'
-import { heading, body } from './template.html'
-```
-
-# Changelog
-
-# Release
+## Release
 
 ```sh
 # Update package.json version

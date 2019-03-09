@@ -1,6 +1,8 @@
 const test = require('tape')
 const { rollup } = require('rollup')
 const { htmlparts } = require('../')
+const { exec } = require('child_process')
+const { unlinkSync, existsSync } = require('fs')
 
 process.chdir('test')
 
@@ -21,5 +23,18 @@ test('error', t => {
     plugins: [htmlparts('basic.html')]
   }).catch(() => {
     t.end()
+  })
+})
+
+test('sample app', t => {
+  if (existsSync('index.min.js'))
+    unlinkSync('index.min.js')
+  exec('rollup -c', (error) => {
+    t.notOk(error)
+    exec('node index.min.js', (error, stdout) => {
+      t.notOk(error)
+      t.equals(stdout, '<h1>This is the<em>heading</em></h1>\n<p>This is the<strong>body</strong>.</p>\n')
+      t.end()
+    })
   })
 })
