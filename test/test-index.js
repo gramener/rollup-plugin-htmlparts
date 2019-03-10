@@ -4,14 +4,20 @@ const { unlinkSync, existsSync } = require('fs')
 
 process.chdir('test')
 
-test('sample app', t => {
-  if (existsSync('index.min.js'))
-    unlinkSync('index.min.js')
-  exec('rollup -c', (error) => {
-    t.notOk(error)
-    exec('node index.min.js', (error) => {
-      t.notOk(error)
-      t.end()
+var conf = [
+  { conf: 'rollup.config.cjs.js', out: 'index.cjs.min.js' },
+  { conf: 'rollup.config.esm.js', out: 'index.esm.min.js' },
+]
+conf.forEach(function(row) {
+  test(row.conf, t => {
+    if (existsSync(row.out))
+      unlinkSync(row.out)
+    exec('rollup -c ' + row.conf, (error) => {
+      t.notOk(error, 'rollup -c compiles')
+      exec('node ' + row.out, (error) => {
+        t.notOk(error, 'html matches')
+        t.end()
+      })
     })
   })
 })

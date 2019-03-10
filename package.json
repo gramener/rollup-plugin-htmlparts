@@ -2,9 +2,14 @@
   "name": "rollup-plugin-htmlparts",
   "version": "1.1.1",
   "description": "Converts HTML files into modules",
+  "main": "dist/rollup-plugin-htmlparts.js",
+  "jsnext:main": "dist/rollup-plugin-htmlparts.mjs",
   "module": "index.js",
   "scripts": {
-    "test": "tape test/test*.js"
+    "build": "rollup -c",
+    "pretest": "npm run build",
+    "test": "tape test/test*.js",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
