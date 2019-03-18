@@ -14,10 +14,10 @@ export default function htmlparts(includes) {
     name: 'htmlparts',
     transform: function(code, id) {
       if (filter(id)) {
-        const matches = code.match(/<!-- var .*? -->[\s\S]*?<!-- end -->/igm)
+        const matches = code.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm)
         const result = matches.map(function(match) {
           const lines = match.split(/\n/)
-          const name = lines[0].split(/ /)[2]
+          const name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
           const html = htmlMinifier.minify(lines.slice(1, -1).join('\n'), {
             collapseBooleanAttributes: true,
             collapseInlineTagWhitespace: true,
