@@ -75,6 +75,7 @@ npm install rollup-plugin-htmlparts
 - 1.1.2: 10 Mar 2019 - Works on ES6 modules and CJS
 - 1.2.0: 19 Mar 2019 - Ignores whitespace in `<!-- var -->` and `<!-- end -->`
 - 1.2.1: 4 Jan 2022 - Upgrade packages for security vulnerabilities
+- 1.2.2: 23 Nov 2022 - Upgrade packages for security vulnerabilities
 
 ## Release
 

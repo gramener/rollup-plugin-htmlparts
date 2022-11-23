@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-htmlparts",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Converts HTML files into modules",
   "main": "dist/rollup-plugin-htmlparts.js",
   "jsnext:main": "dist/rollup-plugin-htmlparts.mjs",
@@ -16,7 +16,7 @@
     "url": "git+https://github.com/gramener/rollup-plugin-htmlparts.git"
   },
   "dependencies": {
-    "html-minifier": "3",
+    "html-minifier": "4",
     "rollup-pluginutils": "2"
   },
   "devDependencies": {
